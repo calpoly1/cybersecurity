@@ -24,13 +24,12 @@ Load balancing ensures that the application will be highly available, in additio
 * Load balancing is configured for high avalailability and security measures, such as DDoS attacks. 
 * The advantage of using a jumpbox is to minimize the risk of exposing the entire network to the outside world.
 
-Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
+Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the logs and system metrics.
 
 * Filebeat monitors specified log files, collects log events, and forwards the events to a log collector
 * Metricbeat collects metrics from the OS and running services, and fowards the events to a log collector
 
 The configuration details of each machine may be found below.
-_Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
@@ -77,25 +76,29 @@ The following screenshot displays the result of running `docker ps` after succes
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+* Web-1 (10.0.0.5), Web-2 (10.0.0.6), and Web-3 (10.0.0.7)
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+* Filebeat
+* Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
+* Filebeat is a lightweight shipper for forwarding and centralizing log data. Installed as an agent on your servers, Filebeat monitors the log files or locations that you specify, collects log events, and forwards them either to Elasticsearch or Logstash for indexing.
+
+* Metricbeat is a lightweight shipper that you can install on your servers to periodically collect metrics from the operating system and from services running on the server. Metricbeat takes the metrics and statistics that it collects and ships them to the output that you specify, such as Elasticsearch or Logstash.
 
 ### Using the Playbook
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the config file to /etc/ansible/files
+- Update the config file to include the host and port number
+- Run the playbook, and navigate to the destination VM to check for the application.
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+* The config files are located in /etc/ansible/files
+* The playbook files are located in /etc/ansible/roles
+* To specify the servers that get either filebeat or metricbeat, you must update the "hosts" section within the playbook files
+
+To connect to the Elk Server to use Kibana, you can navigate to the public facing IP: 23.100.46.201
 
 _As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
