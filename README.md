@@ -3,9 +3,7 @@
 The files in this repository were used to configure the network depicted below.
 
 Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
-
-!(Images/azure.PNG)
+![alt text](https://github.com/calpoly1/cybersecurity/blob/main/Images/azure.PNG)
 
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
 
