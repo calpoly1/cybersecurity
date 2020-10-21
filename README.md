@@ -2,14 +2,9 @@
 
 The files in this repository were used to configure the network depicted below.
 
-Inline-style: 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/calpoly1/cybersecurity/blob/main/Images/azure.PNG)
 
-!(Images/azure.PNG)
-
-These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the _____ file may be used to install only certain pieces of it, such as Filebeat.
-
-  - _TODO: Enter the playbook file._
+These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
 
 This document contains the following details:
 - Description of the Topologu
@@ -24,54 +19,61 @@ This document contains the following details:
 
 The main purpose of this network is to expose a load-balanced and monitored instance of DVWA, the D*mn Vulnerable Web Application.
 
-Load balancing ensures that the application will be highly _____, in addition to restricting _____ to the network.
-- _TODO: What aspect of security do load balancers protect? What is the advantage of a jump box?_
+Load balancing ensures that the application will be highly available, in addition to restricting access to the network.
+
+* Load balancing is configured for high avalailability and security measures, such as DDoS attacks. 
+* The advantage of using a jumpbox is to minimize the risk of exposing the entire network to the outside world.
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the _____ and system _____.
-- _TODO: What does Filebeat watch for?_
-- _TODO: What does Metricbeat record?_
+
+* Filebeat monitors specified log files, collects log events, and forwards the events to a log collector
+* Metricbeat collects metrics from the OS and running services, and fowards the events to a log collector
 
 The configuration details of each machine may be found below.
 _Note: Use the [Markdown Table Generator](http://www.tablesgenerator.com/markdown_tables) to add/remove values from the table_.
 
 | Name     | Function | IP Address | Operating System |
 |----------|----------|------------|------------------|
-| Jump Box | Gateway  | 10.0.0.1   | Linux            |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
-| TODO     |          |            |                  |
+| JumpBox  | Gateway  | 10.0.0.4   | Linux 18.04      |
+| Web1 VM  |  DVWA    | 10.0.0.5   | Linux 18.04      |
+| Web2 VM  |  DVWA    | 10.0.0.6   | Linux 18.04      |
+| web3 VM  |  DVWA    | 10.0.0.7   | Linux 18.04      |
+| ELK-VM   |  ELK     | 10.1.0.4   | Linux 18.04      |
 
 ### Access Policies
 
 The machines on the internal network are not exposed to the public Internet. 
 
-Only the _____ machine can accept connections from the Internet. Access to this machine is only allowed from the following IP addresses:
-- _TODO: Add whitelisted IP addresses_
+Only the jump box machine, the load balancer, and the ELK VM can accept connections from the Internet. Access to these machines is only allowed from the following IP addresses:
+* IP: 160.194.24.63
 
-Machines within the network can only be accessed by _____.
-- _TODO: Which machine did you allow to access your ELK VM? What was its IP address?_
+Machines within the network can only be accessed by the JumpBox to minimize network exposure.  Any VM on the network can be access through the JumpBox. The IP address of the JumpBox, as stated above, is 10.0.0.4.
 
-A summary of the access policies in place can be found in the table below.
+A summary of the access policies in place can be found in the table below. Web1-3 can be access via the load balancer's public IP, which will bring up the DVWA websites.
 
 | Name     | Publicly Accessible | Allowed IP Addresses |
 |----------|---------------------|----------------------|
-| Jump Box | Yes/No              | 10.0.0.1 10.0.0.2    |
-|          |                     |                      |
-|          |                     |                      |
+| JumpBox  | Yes                 | 160.194.24.63        |
+| Web1 VM  | No                  | 10.0.0.4             |
+| Web2 VM  | No                  | 10.0.0.4             |
+| Web3 VM  | No                  | 10.0.0.4             |
+| ELK VM   | Yes                 | 160.194.24.63        |
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because multiple configurations can be made automatically.  By using automating configurations, we can troubleshoot and monitor installations from one source, eliminating points of failure.
 
 The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+
+* Configure ELK VM with a Docker installation
+* Install Python 3 pip module
+* Use the pip module to install a Docker module
+* Direct the ELK VM to increase virtual memory
+* Download and launch a docker ELK container with published ports set to 9200, 5844, and 5601 for Elasticsearch, Logstash, and Kibana respectively.
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
+![alt text](https://github.com/calpoly1/cybersecurity/blob/main/Images/docker_status.PNG)
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
