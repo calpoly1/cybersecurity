@@ -99,6 +99,4 @@ SSH into the control node and follow the steps below:
 * The playbook files are located in /etc/ansible/roles
 * To specify the servers that get either filebeat or metricbeat, you must update the "hosts" section within the playbook files
 
-To connect to the Elk Server to use Kibana, you can navigate to the public facing IP: 23.100.46.201
-
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+To connect to the Elk Server to use Kibana, you can navigate to the public facing IP: 23.100.46.201:5601
